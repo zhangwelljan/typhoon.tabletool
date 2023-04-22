@@ -1,0 +1,22 @@
+using Newtonsoft.Json;
+using System.Collections.Generic;
+
+namespace Typhoon.Excel2Json.Export
+{
+    /// <summary>
+    /// json导出类
+    /// </summary>
+    public class JsonExporter
+    {
+        public const string ALL_IN_ONE_JSON_NAME = "allInOne";
+
+        //创建导出数据
+        public Dictionary<string, string> CreateExportDatabase(AllTables all)
+        {
+            var result = new Dictionary<string, string>();
+            result[ALL_IN_ONE_JSON_NAME] = JsonConvert.SerializeObject(all);           
+			$CREATE_EXPORT_DATABASE_METHOD_CONTENT
+            return result;
+        }
+    }
+}

@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+
+namespace Typhoon.Excel2Json.Export
+{
+    /// <summary>
+    /// 表格基类
+    /// </summary>
+    [Serializable]
+    public abstract class Table<T> : ITable<T> where T : ITableValue
+    {
+        //数据
+        public T[] Data;
+
+        public Dictionary<string, Dictionary<int, int>> IntKeys = new Dictionary<string, Dictionary<int, int>>();
+
+        public Dictionary<string, Dictionary<string, int>> StringKeys =
+            new Dictionary<string, Dictionary<string, int>>();
+
+        /// <summary>
+        /// 是否有条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public bool Has(string column, string key)
+        {
+            if (!StringKeys.ContainsKey(column))
+            {
+                return false;
+            }
+
+            return StringKeys[column].ContainsKey(key);
+        }
+
+        /// <summary>
+        /// 是否有条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public bool Has(string column, int key)
+        {
+            if (!IntKeys.ContainsKey(column))
+            {
+                return false;
+            }
+
+            return IntKeys[column].ContainsKey(key);
+        }
+
+        /// <summary>
+        /// 获取条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public ITableValue Get(string column, string key)
+        {
+            return GetValue(column, key);
+        }
+
+        /// <summary>
+        /// 获取条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public ITableValue Get(string column, int key)
+        {
+            return GetValue(column, key);
+        }
+
+        /// <summary>
+        /// 获取条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public T GetValue(string column, string key)
+        {
+            var index = StringKeys[column][key];
+            return Data[index];
+        }
+
+        /// <summary>
+        /// 获取条目
+        /// </summary>
+        /// <param name="column">列名</param>
+        /// <param name="key">匹配值</param>
+        /// <returns></returns>
+        public T GetValue(string column, int key)
+        {
+            var index = IntKeys[column][key];
+            return Data[index];
+        }
+    }
+}
