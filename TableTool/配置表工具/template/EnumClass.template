@@ -1,0 +1,8 @@
+ namespace Typhoon.Excel2Json.Export
+{          
+	$SUMMARY			
+    public enum  $ENUM_NAME
+    {
+		$CODE
+	}
+}

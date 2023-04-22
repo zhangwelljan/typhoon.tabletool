@@ -1,0 +1,3 @@
+@ECHO OFF
+echo 开始导出配置表...
+START /WAIT Typhoon.Excel2Json.exe

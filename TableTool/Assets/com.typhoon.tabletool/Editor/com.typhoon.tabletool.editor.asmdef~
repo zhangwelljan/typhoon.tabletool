@@ -1,0 +1,16 @@
+{
+    "name": "com.typhoon.tabletool.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:629157f0a20eb684e85b05bef1766751"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

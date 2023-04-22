@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+namespace Typhoon.Excel2Json.Export
+{
+	$SUMMARY
+	[Serializable]
+    public class  $CLASS_NAME:ITableValue
+    {
+		$CODE
+    }
+}
+            

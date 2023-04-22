@@ -1,0 +1,614 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Typhoon.Excel2Json.Export
+{
+    public static class Excel2JsonConvert
+    {
+		/// <summary>
+        /// string[]转int[]
+        /// </summary>
+        public static int[] StringArrayToIntArray(params string[] contents)
+        {
+            List<int> result = new List<int>();
+            foreach (var content in contents)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(content.ToInt());
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// string[]转long[]
+        /// </summary>
+        public static long[] StringArrayToLongArray(params string[] contents)
+        {
+            List<long> result = new List<long>();
+            foreach (var content in contents)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(content.ToLong());
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// string[]转float[]
+        /// </summary>
+        public static float[] StringArrayToFloatArray(params string[] contents)
+        {
+            List<float> result = new List<float>();
+            foreach (var content in contents)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(content.ToFloat());
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// string[]转double[]
+        /// </summary>
+        public static double[] StringArrayToDoubleArray(params string[] contents)
+        {
+            List<double> result = new List<double>();
+            foreach (var content in contents)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(content.ToDouble());
+                }
+            }
+
+            return result.ToArray();
+        }
+
+
+        /// <summary>
+        /// string[]转bool[]
+        /// </summary>
+        public static bool[] StringArrayToBoolArray(params string[] contents)
+        {
+            List<bool> result = new List<bool>();
+            foreach (var content in contents)
+            {
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(content.ToBool());
+                }
+            }
+
+            return result.ToArray();
+        }
+
+
+        /// <summary>
+        /// string[]转string[]
+        /// </summary>
+        public static string[] StringArrayToStringArray(params string[] contents)
+        {
+            List<string> result = new List<string>();           
+            for (int i = 0; i < contents.Length; i++)
+            {
+				var element = contents[i];
+				if (string.IsNullOrEmpty(element))
+                {                 
+                    break;
+                }
+                result.Add(element);
+            }
+
+            return result.ToArray();
+        }
+
+	
+		 /// <summary>
+        /// 字符串转int
+        /// </summary>
+        public static int ToInt(this string str, string error = null)
+        {
+            try
+            {
+                return int.Parse(str);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 字符串转float
+        /// </summary>
+        public static float ToFloat(this string str, string error = null)
+        {
+            try
+            {
+                return float.Parse(str);
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+        /// <summary>
+        /// 字符串转bool
+        /// </summary>
+        public static bool ToBool(this string str, string error = null)
+        {
+            try
+            {
+                return int.Parse(str) == 1;
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+        /// <summary>
+        /// 字符串转long
+        /// </summary>
+        public static long ToLong(this string str, string error = null)
+        {
+            try
+            {
+                return long.Parse(str);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转double
+        /// </summary>
+        public static double ToDouble(this string str, string error = null)
+        {
+            try
+            {
+                return double.Parse(str);
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转int[]
+        /// </summary>
+        public static int[] ToIntArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new int[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new int[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i].ToInt(error);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转float[]
+        /// </summary>
+        public static float[] ToFloatArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new float[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new float[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i].ToFloat(error);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+              throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转double[]
+        /// </summary>
+        public static double[] ToDoubleArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new double[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new double[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i].ToDouble(error);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+              throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转long[]
+        /// </summary>
+        public static long[] ToLongArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new long[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new long[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i].ToLong(error);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转bool[]
+        /// </summary>
+        public static bool[] ToBoolArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new bool[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new bool[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i].ToBool(error);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转string[]
+        /// </summary>
+        public static string[] ToStringArray(this string str, string error = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return new string[0];
+                }
+                else
+                {
+                    var contents = str.Split('|');
+                    var result = new string[contents.Length];
+                    for (int i = 0; i < contents.Length; i++)
+                    {
+                        result[i] = contents[i];
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+               throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 字符串转int[][]
+        /// </summary>
+        public static int[][] ToIntDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<int[]> result = new List<int[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToIntArray());
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// 字符串转long[][]
+        /// </summary>
+        public static long[][] ToLongDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<long[]> result = new List<long[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToLongArray());
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// 字符串转float[][]
+        /// </summary>
+        public static float[][] ToFloatDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<float[]> result = new List<float[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToFloatArray());
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// 字符串转double[][]
+        /// </summary>
+        public static double[][] ToDoubleDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<double[]> result = new List<double[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToDoubleArray());
+            }
+
+            return result.ToArray();
+        }
+
+
+        /// <summary>
+        /// 字符串转bool[][]
+        /// </summary>
+        public static bool[][] ToBoolDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<bool[]> result = new List<bool[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToBoolArray());
+            }
+
+            return result.ToArray();
+        }
+
+
+        /// <summary>
+        /// 字符串转string[][]
+        /// </summary>
+        public static string[][] ToStringDyadicArray(this string[] strs)
+        {
+            int rangeIndex = strs.Length - 1;
+            //截取有效范围
+            for (int i = strs.Length - 1; i >= 0; i--)
+            {
+                //遇到第一个非空数组，返回
+                if (!string.IsNullOrEmpty(strs[i]))
+                {
+                    rangeIndex = i;
+                    break;
+                }
+            }
+
+            List<string[]> result = new List<string[]>();
+            for (int i = 0; i <= rangeIndex; i++)
+            {
+                var content = strs[i];
+                result.Add(content.ToStringArray());
+            }
+
+            return result.ToArray();
+        }
+
+
+        /// <summary>
+        /// 是否为空或者空白
+        /// </summary>
+        public static bool IsEmptyOrNull(string[] row, int[] columns)
+        {
+            foreach (var column in columns)
+            {
+                if (!string.IsNullOrEmpty(row[column]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// string[,]转string[][]
+        /// </summary>
+        public static string[][] ToStringDyadicArray(this string[,] strs)
+        {
+            List<string[]> list = new List<string[]>();
+            var rows = strs.GetLength(0);
+            var columns = strs.GetLength(1);
+            for (int i = 0; i < rows; i++)
+            {
+                list.Add(new string[columns]);
+                for (int j = 0; j < columns; j++)
+                {
+                    list[i][j] = strs[i, j];
+                }
+            }
+
+            return list.ToArray();
+        }
+		
+		/// <summary>
+        /// 构建AllTables实例
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static AllTables ParseToAllTables(Dictionary<string, string[,]> dic)
+        {
+            var result = new AllTables();
+			$PARSE_TO_ALL_TABLES_METHOD_CONTENT          
+            result.Initialize();
+            return result;
+        }
+
+		
+		$PARSE_TO_METHOD
+		
+		$ANALYSIS_KEYS_METHOD
+		
+       
+    }
+}

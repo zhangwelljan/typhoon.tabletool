@@ -1,0 +1,447 @@
+using System.Collections.Generic;
+using System.Text;
+
+namespace Typhoon.Excel2Json.Export
+{
+    public interface IToDetailString
+    {
+        string ToDetailString(int padLeft = 0);
+    }
+
+    /// <summary>
+    /// 拓展ToDetailString
+    /// </summary>
+    public static class ToDetailStringExtension
+    {
+        private static Stack<StringBuilder> _stack = new Stack<StringBuilder>();
+
+        public static StringBuilder GetStringBuilder()
+        {
+            if (_stack.Count > 0)
+            {
+                var result = _stack.Pop();
+                result.Clear();
+                return result;
+            }
+
+            return new StringBuilder();
+        }
+
+        //回收
+        private static void RecycleStringBuilder(StringBuilder sb)
+        {
+            _stack.Push(sb);
+        }
+
+        public static string ToDetailString(this int value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Clear();
+            sb.Append(' ', pad);
+            sb.Append(value.ToString());
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this long value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            sb.Append(value.ToString());
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this float value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            sb.Append(value.ToString());
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this double value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            sb.Append(value.ToString());
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this bool value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            sb.Append(value.ToString());
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this string value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            sb.Append(value);
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this int[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+
+        public static string ToDetailString(this long[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this float[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this double[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this bool[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this string[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.Append($"{value[i]}");
+                    if (i != value.Length - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToFinalDetailString(this string[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    sb.AppendLine($"{value[i]}".ToDetailString(pad));
+                }
+            }
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this int[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this long[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this float[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this double[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this bool[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+        public static string ToDetailString(this string[][] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.ToDetailString(pad));
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+
+
+        public static string GetDetailString(this IToDetailString value, int pad = 0)
+        {
+            return value.ToDetailString(pad);
+        }
+
+        public static string GetDetailString(this IToDetailString[] value, int pad = 0)
+        {
+            var sb = GetStringBuilder();
+
+            sb.Append(' ', pad);
+            if (value == null)
+            {
+                sb.Append("null");
+            }
+            else
+            {
+                sb.Clear();
+                for (int i = 0; i < value.Length; i++)
+                {
+                    var element = value[i];
+                    sb.AppendLine(element.GetDetailString(pad));
+                    if (i != value.Length - 1)
+                    {
+                        sb.AppendLine();
+                    }
+                }
+            }
+
+            var result = sb.ToString();
+            RecycleStringBuilder(sb);
+            return result;
+        }
+    }
+}

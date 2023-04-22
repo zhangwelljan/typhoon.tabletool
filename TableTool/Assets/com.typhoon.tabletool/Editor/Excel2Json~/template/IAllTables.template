@@ -1,0 +1,13 @@
+namespace Typhoon.Excel2Json.Export
+{
+    /// <summary>
+    /// 接口=AllTables
+    /// </summary>
+    interface IAllTables
+    {
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        void Initialize();
+    }
+}
